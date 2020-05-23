@@ -1,4 +1,5 @@
-# Projeto Itaú/USCS - Conta Corrente
+# ![ITAUUSCS](https://user-images.githubusercontent.com/62891985/82739134-7e78b200-9d13-11ea-9d90-0e573c217429.png)
+Projeto Itaú/USCS - Conta Corrente
 
 ## Casos da Aplicação
 1)	Criar uma conta corrente com cadastro e saldo;

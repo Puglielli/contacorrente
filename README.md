@@ -6,12 +6,12 @@
 3)	Emitir um aviso, via evento, de criação de conta e um aviso por operação realizada.
 
 ## Entregáveis
--[] Desenho da solução que será apresentada
--[] Código(s) fonte que será utilizado na apresentação.
--[] Readme com procedimento para executar o sistema apresentado
+- [] Desenho da solução que será apresentada
+- [] Código(s) fonte que será utilizado na apresentação.
+- [] Readme com procedimento para executar o sistema apresentado
 
 ## Intaslar
 
 ## Criar coneção servidor
--[] Realizar coneção com cassandra
--[] Realizar coneção com kafka
+- [] Realizar coneção com cassandra
+- [] Realizar coneção com kafka

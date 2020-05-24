@@ -10,10 +10,12 @@ public class DadosDaConta {
         String abrirConta;
         String cadastrarCliente;
 
-        public void cadastraClient{
-            CadastroUsuarioPF casdastroPF = new CadastroUsuarioPF();
-            CadastroUsuarioPJ cadastroUsuarioPJ = new CadastroUsuarioPJ();
+        public void cadastrarClient{
+            CadastroUsuarioPF casdastroPF[ ] = new CadastroUsuarioPF();
+            CadastroUsuarioPJ cadastroUsuarioPJ [] = new CadastroUsuarioPJ();
 
-            }
+        setCadastroPF [0]= ("065.265.021-00", "Cleusa", "Rua dos cagados,23", "dolar", 11225544)   ;
+
+        }
 
         }

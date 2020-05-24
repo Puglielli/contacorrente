@@ -16,10 +16,6 @@ import java.util.UUID;
 @Table(value = "projectitau")
 
 public class DBEntity {
-    @PrimaryKeyColumn(
-            cpf_cnpj = varchar,
-            ordinal = 1,
-            type = PrimaryKeyType.PARTITIONED)
     UUID id;
 
     @Column(value = "mansagem")

@@ -14,13 +14,10 @@ public class DadosDaConta extends  Banco{
     public Object CadastroUsuarioPF;
     public Object CadastroUsuarioPJ;
 
-    public  String CadastrarCliente(){
+    public void CadastrarCliente(){
             if (status == false){
                 System.out.println ("Não existe esse cadastro " + cadastrarCliente);
-                CadastroUsuarioPJ cadastrarClientePJ = new CadastroUsuarioPJ();
-                CadastroUsuarioPF cadastrarClientePF = new CadastroUsuarioPF();
             }
-        }
-
-        }
+    }
+}
 

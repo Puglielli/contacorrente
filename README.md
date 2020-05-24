@@ -131,7 +131,7 @@ docker-compose exec kafka  \
 
 Executar a class `ContacorrenteApplication`.
 
-## Explore Rounting
+## Rotas
 
 ```bash
   POST   http://localhost:8081/cliente

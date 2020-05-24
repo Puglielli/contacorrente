@@ -27,9 +27,8 @@ https://github.com/Puglielli/contacorrente.git
 
 **2. Instalar o Docker**
 
-```bash
-https://docs.docker.com/get-docker/
-```
+Site para download do [Docker].
+(https://docs.docker.com/get-docker/)
 
 **3. Instalar e configurar o banco de dados *Cassandra***
 

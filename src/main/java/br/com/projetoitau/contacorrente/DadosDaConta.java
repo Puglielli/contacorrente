@@ -1,21 +1,16 @@
 package br.com.projetoitau.contacorrente;
 
 public class DadosDaConta {
-        int numConta;
-        String agencia;
-        int dac;
-        double saldoConta;
-        String tipoDeTransacao;
+        protected int numConta;
+        protected String agencia;
+        protected int dac;
+        protected double saldoConta;
+        protected String tipoDeTransacao;
 
-        String abrirConta;
-        String cadastrarCliente;
+       private String abrirConta;
+       private String cadastrarCliente;
+        private boolean status;
 
-        public void cadastrarClient{
-            CadastroUsuarioPF casdastroPF[ ] = new CadastroUsuarioPF();
-            CadastroUsuarioPJ cadastroUsuarioPJ [] = new CadastroUsuarioPJ();
-
-        setCadastroPF [0]= ("065.265.021-00", "Cleusa", "Rua dos cagados,23", "dolar", 11225544)   ;
-
+        
         }
 
-        }

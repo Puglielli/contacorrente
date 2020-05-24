@@ -1,6 +1,6 @@
 package br.com.projetoitau.contacorrente;
 
-public class CadastroUsuarioPF extends Banco{
+public class CadastroUsuarioPF {
     private String cpf;
     private String nome;
     private String endereco;

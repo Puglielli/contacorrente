@@ -43,7 +43,7 @@ Site para download do [Docker](https://docs.docker.com/get-docker/).
  
   `docker cp <FILE_CASSANDRA> cassandra:/opt/dse/resources/cassandra/conf/`
 
-  Obs.: Substituir o ***<FILE_CASSANDRA>*** pelo diretório do arquivo *cassandra.yaml*, que está localizado no repositório do projeto "_/contacorrente/src/main/resources/config/cassandra.yaml_".
+  Obs.: Substituir o ***<FILE_CASSANDRA>*** pelo diretório do arquivo *cassandra.yaml*, que está localizado no repositório do projeto `"_/contacorrente/src/main/resources/config/cassandra.yaml_"`.
 
   **3.4. Realizar stop e start do container *Cassandra***
   
@@ -72,7 +72,7 @@ Site para download do [Docker](https://docs.docker.com/get-docker/).
   **3.5.1. Criar as tabelas**
 
 ```bash
-  CREATE TABLE cliente (
+  CREATE TABLE clienteVO (
       nome VARCHAR,
       cpf_cnpj VARCHAR PRIMARY KEY,
       tipo_de_cliente VARCHAR,
@@ -130,11 +130,11 @@ Site para download do [Docker](https://docs.docker.com/get-docker/).
 
 **5. importar o projeto no IDE**
 
-Executar a class `ContacorrenteApplication`.
+Executar a classe `ContacorrenteApplication`.
 
 ## Rotas
 
 ```bash
-  POST   http://localhost:8081/cliente
-  GET     http://localhost:8081/cliente
+  POST   http://localhost:8081/clienteVO
+  GET     http://localhost:8081/clienteVO
 ```

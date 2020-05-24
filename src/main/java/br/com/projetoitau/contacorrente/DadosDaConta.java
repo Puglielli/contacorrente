@@ -15,9 +15,9 @@ public class DadosDaConta extends  Banco{
     public Object CadastroUsuarioPJ;
 
     public void CadastrarCliente(){
-            if (status == false){
+            if (status == false)
                 System.out.println ("Não existe esse cadastro " + cadastrarCliente);
-            }
+
     }
 }
 

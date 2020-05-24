@@ -1,4 +1,4 @@
-# contacorrente
+# ![uit](https://user-images.githubusercontent.com/62891985/82739494-5e96bd80-9d16-11ea-993d-25c048bad462.png) Projeto Itaú/USCS - Conta Corrente
 
 Tecnologias utilizadas:
 
@@ -17,9 +17,9 @@ Tecnologias utilizadas:
   - Kafka
   - Zookeeper
 
-## Steps to Setup
+## Etapas para a instalação
 
-**1. Clone the Application**
+**1. Clonar o aplicativo**
 
 ```bash
 https://github.com/Puglielli/contacorrente.git

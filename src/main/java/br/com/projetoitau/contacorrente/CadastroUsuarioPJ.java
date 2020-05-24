@@ -20,26 +20,32 @@ public class CadastroUsuarioPJ {
     }
 
     public void setRazaoSocial(String razaoSocial) {
+
         this.razaoSocial = razaoSocial;
     }
 
     public void setInscEstadual(String inscEstadual) {
+
         this.inscEstadual = inscEstadual;
     }
 
     public void setEndereco(String endereco) {
+
         this.endereco = endereco;
     }
 
     public void setNumConta(int numConta) {
+
         this.numConta = numConta;
     }
 
     public String getCnpj() {
+
         return cnpj;
     }
 
     public String getRazaoSocial() {
+
         return razaoSocial;
     }
 
@@ -52,7 +58,9 @@ public class CadastroUsuarioPJ {
     }
 
     public int getNumConta() {
+
         return numConta;
+
     }
 
     public void ImprimirDados() {

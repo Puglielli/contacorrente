@@ -72,7 +72,7 @@ Site para download do [Docker](https://docs.docker.com/get-docker/).
   **3.5.1. Criar as tabelas**
 
 ```bash
-  CREATE TABLE clienteVO (
+  CREATE TABLE cliente (
       nome VARCHAR,
       cpf_cnpj VARCHAR PRIMARY KEY,
       tipo_de_cliente VARCHAR,
@@ -135,6 +135,6 @@ Executar a classe `ContacorrenteApplication`.
 ## Rotas
 
 ```bash
-  POST   http://localhost:8081/clienteVO
-  GET     http://localhost:8081/clienteVO
+  POST   http://localhost:8081/cliente
+  GET     http://localhost:8081/cliente
 ```

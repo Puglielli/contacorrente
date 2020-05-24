@@ -125,7 +125,7 @@ Site para download do [Docker](https://docs.docker.com/get-docker/).
 
   ```bash
   docker-compose exec kafka  \
-      kafka-topics --describe --topic bank-listener  --zookeeper zookeeper:2181
+  kafka-topics --describe --topic bank-listener  --zookeeper zookeeper:2181
   ```
 
 **5. importar o projeto no IDE**

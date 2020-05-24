@@ -65,9 +65,9 @@ https://docs.docker.com/get-docker/
 
   **3.5.3. Criar o Keyspace**
 
-  `CREATE KEYSPACE itaudb WITH REPLICATION = {'class': 'SimpleStrategy','replication_factor' : 1};`
+  `CREATE KEYSPACE dbo WITH REPLICATION = {'class': 'SimpleStrategy','replication_factor' : 1};`
 
-  `USE itaudb;`
+  `USE dbo;`
 
   **3.5.1. Criar as tabelas**
 

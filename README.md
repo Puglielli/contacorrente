@@ -82,14 +82,16 @@ https://docs.docker.com/get-docker/
       incr_estadual VARCHAR,
       num_conta VARCHAR
   );
-
+```
+```bash
     CREATE TABLE conta (
       num_conta VARCHAR PRIMARY KEY,
       agencia VARCHAR,
       dac INT,
       saldo DOUBLE
   );
-
+```
+```bash
     CREATE TABLE historico (
       cpf_cnpj VARCHAR PRIMARY KEY,
       tipo_de_transacao VARCHAR,

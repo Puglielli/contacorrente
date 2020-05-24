@@ -1,6 +1,6 @@
 package br.com.projetoitau.contacorrente;
 
-public class DadosDaConta {
+public class DadosDaConta extends  Banco{
         protected int numConta;
         protected String agencia;
         protected int dac;
@@ -11,6 +11,6 @@ public class DadosDaConta {
        private String cadastrarCliente;
         private boolean status;
 
-        
+
         }
 

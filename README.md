@@ -71,7 +71,7 @@ https://docs.docker.com/get-docker/
 
   **3.5.1. Criar as tabelas**
 
-  	```bash
+```bash
       CREATE TABLE cliente (
       nome VARCHAR,
       cpf_cnpj VARCHAR PRIMARY KEY,

@@ -116,17 +116,17 @@ Site para download do [Docker](https://docs.docker.com/get-docker/).
 
   **4.4. Para criar um Topic no Kafka, execute o comando:**
 
-  ```bash
+```bash
   docker-compose exec kafka  \
   kafka-topics --create --topic bank-listener --partitions 3 --replication-factor 1 --if-not-exists --zookeeper zookeeper:2181
-  ```
+```
     
   **4.5. Para validar se o Topic foi criado, execute o comando:**
 
-  ```bash
+```bash
   docker-compose exec kafka  \
   kafka-topics --describe --topic bank-listener  --zookeeper zookeeper:2181
-  ```
+```
 
 **5. importar o projeto no IDE**
 

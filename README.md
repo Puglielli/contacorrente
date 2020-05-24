@@ -43,7 +43,7 @@ https://docs.docker.com/get-docker/
 
   **3.3. Executar o comando para fazer a copia do arquivo *cassandra.yaml* para dentro do container**
  
-  `docker cp ./cassandra.yaml cassandra:/opt/dse/resources/cassandra/conf/`
+  `docker cp /contacorrente/src/main/resources/config cassandra:/opt/dse/resources/cassandra/conf/`
 
   **3.4. Realizar stop e start do container *Cassandra***
   

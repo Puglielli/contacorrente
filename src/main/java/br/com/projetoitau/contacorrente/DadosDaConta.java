@@ -11,12 +11,15 @@ public class DadosDaConta extends  Banco{
        private String abrirConta;
        private String cadastrarCliente;
         private boolean status;
-    public Object CadastroUsuarioPF;
-    public Object CadastroUsuarioPJ;
+    private Object CadastroUsuarioPF;
+    private Object CadastroUsuarioPJ;
 
     public void CadastrarCliente(){
             if (status == false)
                 System.out.println ("Não existe esse cadastro " + cadastrarCliente);
+
+    }
+    public void status(){
 
     }
 }

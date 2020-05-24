@@ -72,7 +72,7 @@ https://docs.docker.com/get-docker/
   **3.5.1. Criar as tabelas**
 
 ```bash
-      CREATE TABLE cliente (
+  CREATE TABLE cliente (
       nome VARCHAR,
       cpf_cnpj VARCHAR PRIMARY KEY,
       tipo_de_cliente VARCHAR,
@@ -84,7 +84,7 @@ https://docs.docker.com/get-docker/
   );
 ```
 ```bash
-    CREATE TABLE conta (
+  CREATE TABLE conta (
       num_conta VARCHAR PRIMARY KEY,
       agencia VARCHAR,
       dac INT,
@@ -92,7 +92,7 @@ https://docs.docker.com/get-docker/
   );
 ```
 ```bash
-    CREATE TABLE historico (
+  CREATE TABLE historico (
       cpf_cnpj VARCHAR PRIMARY KEY,
       tipo_de_transacao VARCHAR,
       data DATE,

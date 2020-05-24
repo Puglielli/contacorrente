@@ -10,7 +10,7 @@ public class DadosDaConta {
         String abrirConta;
         String cadastrarCliente;
 
-        public void cadastraClient {
+        public void cadastraClient{
             CadastroUsuarioPF casdastroPF = new CadastroUsuarioPF();
             CadastroUsuarioPJ cadastroUsuarioPJ = new CadastroUsuarioPJ();
 

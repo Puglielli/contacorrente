@@ -35,6 +35,6 @@ public class Banco {
         return agencia;
     }
     public void imprimeDados() {
-        System.out.println("Nome do Banco: "+ getBanco() + "\n"+ "Numero Conta: " +getNumConta() + "\n"+"Número da Agência: " + getAgencia());
+        System.out.println("Nome do Banco: "+ this.getBanco() + "\n"+ "Numero Conta: " +this.getNumConta() + "\n"+"Número da Agência: " + this.getAgencia());
         banco.imprimeDados();
 }

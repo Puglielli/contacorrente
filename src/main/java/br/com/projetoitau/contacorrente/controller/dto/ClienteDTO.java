@@ -8,7 +8,7 @@ public class ClienteDTO {
     private String endereco;
     private String profissao;
     private String razao_social;
-    private String incr_estadual;
+    private String inscr_estadual;
     private String num_conta;
 
     public String getNome() {
@@ -59,12 +59,12 @@ public class ClienteDTO {
         this.razao_social = razao_social;
     }
 
-    public String getIncr_estadual() {
-        return incr_estadual;
+    public String getInscr_estadual() {
+        return inscr_estadual;
     }
 
-    public void setIncr_estadual(String incr_estadual) {
-        this.incr_estadual = incr_estadual;
+    public void setInscr_estadual(String inscr_estadual) {
+        this.inscr_estadual = inscr_estadual;
     }
 
     public String getNum_conta() {

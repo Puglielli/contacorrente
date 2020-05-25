@@ -101,7 +101,7 @@ public class ClienteController {
             clienteVO.setEndereco(clienteDTO.getEndereco());
             clienteVO.setProfissao(clienteDTO.getProfissao());
             clienteVO.setRazao_social(clienteDTO.getRazao_social());
-            clienteVO.setIncr_estadual(clienteDTO.getIncr_estadual());
+            clienteVO.setInscr_estadual(clienteDTO.getInscr_estadual());
 
             clienteVO = clienteRepository.save(clienteVO);
 
@@ -154,7 +154,7 @@ public class ClienteController {
             clienteVO.setEndereco(clienteDTO.getEndereco());
             clienteVO.setProfissao(clienteDTO.getProfissao());
             clienteVO.setRazao_social(clienteDTO.getRazao_social());
-            clienteVO.setIncr_estadual(clienteDTO.getIncr_estadual());
+            clienteVO.setInscr_estadual(clienteDTO.getInscr_estadual());
 
             clienteRepository.save(clienteVO);
 

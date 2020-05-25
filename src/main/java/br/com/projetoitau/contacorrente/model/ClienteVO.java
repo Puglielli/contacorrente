@@ -32,8 +32,8 @@ public class ClienteVO implements Serializable {
     @Column(value = "razao_social")
     private String razao_social;
 
-    @Column(value = "incr_estadual")
-    private String incr_estadual;
+    @Column(value = "inscr_estadual")
+    private String inscr_estadual;
 
     @Column(value = "num_conta")
     private String num_conta;
@@ -86,12 +86,12 @@ public class ClienteVO implements Serializable {
         this.razao_social = razao_social;
     }
 
-    public String getIncr_estadual() {
-        return incr_estadual;
+    public String getInscr_estadual() {
+        return inscr_estadual;
     }
 
-    public void setIncr_estadual(String incr_estadual) {
-        this.incr_estadual = incr_estadual;
+    public void setInscr_estadual(String inscr_estadual) {
+        this.inscr_estadual = inscr_estadual;
     }
 
     public String getNum_conta() {

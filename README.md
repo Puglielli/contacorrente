@@ -93,9 +93,10 @@ Site para download do [Docker](https://docs.docker.com/get-docker/).
 ```
 ```bash
   CREATE TABLE historico (
-      cpf_cnpj VARCHAR PRIMARY KEY,
+      id UUID PRIMARY KEY,
+      num_conta VARCHAR,
       tipo_de_transacao VARCHAR,
-      data DATE,
+      data timestamp,
       status INT
   );
 ```

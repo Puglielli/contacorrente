@@ -5,7 +5,7 @@ import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.UUID;
 
 @Table(value = "historico")
@@ -28,7 +28,7 @@ public class HistoricoVO {
     private String tipo_de_operacao;
 
     @Column(value = "data")
-    private Timestamp data;
+    private Date data;
 
     @Column(value = "status")
     private Integer status; // Failed = 0, Success = 1
@@ -65,11 +65,11 @@ public class HistoricoVO {
         this.tipo_de_operacao = tipo_de_operacao;
     }
 
-    public Timestamp getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(Timestamp data) {
+    public void setData(Date data) {
         this.data = data;
     }
 

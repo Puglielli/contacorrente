@@ -1,6 +1,6 @@
 package br.com.projetoitau.contacorrente.controller.dto;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.UUID;
 
 public class HistoricoDTO {
@@ -9,7 +9,7 @@ public class HistoricoDTO {
     private String num_conta;
     private String tipo_de_transacao;
     private String tipo_de_operacao;
-    private Timestamp data;
+    private Date data;
     private Integer status; // Failed = 0, Success = 1
 
     public UUID getId() {
@@ -44,11 +44,11 @@ public class HistoricoDTO {
         this.tipo_de_operacao = tipo_de_operacao;
     }
 
-    public Timestamp getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(Timestamp data) {
+    public void setData(Date data) {
         this.data = data;
     }
 

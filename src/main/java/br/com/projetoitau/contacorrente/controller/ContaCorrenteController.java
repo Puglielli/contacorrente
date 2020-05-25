@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import static java.text.MessageFormat.format;
+import static br.com.projetoitau.contacorrente.utils.BaseResource.formatAccount;
 import java.util.List;
 
 @RestController
@@ -37,7 +38,7 @@ public class ContaCorrenteController {
 
         } catch (Exception ex) {
 
-            kafkaProducer.send(ErrorCode.BAD_REQUEST, Status.FAILED);
+            kafkaProducer.send(ErrorCode.BAD_REQUEST, "Buscar todas as contas", Status.FAILED);
 
             return ResponseEntity.status(500).body(new AppException(ErrorCode.BAD_REQUEST));
         }
@@ -48,11 +49,7 @@ public class ContaCorrenteController {
 
         try {
 
-            num_conta = num_conta.replaceAll("/\\D/g", "");
-
-            num_conta = num_conta.replaceAll("([0-9]{8})([0-9]{1})", "$1-$2");
-
-            if (contaCorrenteRepository.getContaCorrenteByNumConta(num_conta).isEmpty()) {
+            if (contaCorrenteRepository.getContaCorrenteByNumConta(formatAccount(num_conta)).isEmpty()) {
 
                 return ResponseEntity.status(404).body(new AppException(ErrorCode.ACCOUNT_NOT_FOUND));
             }
@@ -63,7 +60,7 @@ public class ContaCorrenteController {
 
         } catch (Exception ex) {
 
-            kafkaProducer.send(ErrorCode.BAD_REQUEST, Status.FAILED);
+            kafkaProducer.send(ErrorCode.BAD_REQUEST, "Buscar Conta", Status.FAILED);
 
             return ResponseEntity.status(500).body(new AppException(ErrorCode.BAD_REQUEST));
         }
@@ -78,7 +75,7 @@ public class ContaCorrenteController {
 
             if (contaCorrenteVOS.isEmpty()) {
 
-                kafkaProducer.send(ErrorCode.ACCOUNT_NOT_FOUND, Status.FAILED);
+                kafkaProducer.send(ErrorCode.ACCOUNT_NOT_FOUND, "Debito", Status.FAILED);
 
                 return ResponseEntity.status(404).body(new AppException(ErrorCode.ACCOUNT_NOT_FOUND));
             }
@@ -90,7 +87,7 @@ public class ContaCorrenteController {
 
                 contaCorrenteRepository.save(contaCorrenteVO);
 
-                kafkaProducer.send(contaCorrenteVO, format("Foi retirado {0} do saldo", contaCorrenteDTO.getDebito()), Status.SUCCESS);
+                kafkaProducer.send(contaCorrenteVO, "Debito", format("Foi retirado {0} do saldo", contaCorrenteDTO.getDebito()), Status.SUCCESS);
 
                 return ResponseEntity.status(204).build();
 
@@ -101,7 +98,7 @@ public class ContaCorrenteController {
 
         } catch (Exception ex) {
 
-            kafkaProducer.send(ErrorCode.BAD_REQUEST, Status.FAILED);
+            kafkaProducer.send(ErrorCode.BAD_REQUEST, "Debito", Status.FAILED);
 
             return ResponseEntity.status(500).body(new AppException(ErrorCode.BAD_REQUEST));
         }
@@ -116,7 +113,7 @@ public class ContaCorrenteController {
 
             if (contaCorrenteVOS.isEmpty()) {
 
-                kafkaProducer.send(ErrorCode.ACCOUNT_NOT_FOUND, Status.FAILED);
+                kafkaProducer.send(ErrorCode.ACCOUNT_NOT_FOUND, "Crédito", Status.FAILED);
 
                 return ResponseEntity.status(404).body(new AppException(ErrorCode.ACCOUNT_NOT_FOUND));
             }
@@ -127,13 +124,13 @@ public class ContaCorrenteController {
 
             contaCorrenteRepository.save(contaCorrenteVO);
 
-            kafkaProducer.send(contaCorrenteVO, format("Foi acrescentado {0} ao saldo", contaCorrenteDTO.getCredito()), Status.SUCCESS);
+            kafkaProducer.send(contaCorrenteVO, "Crédito", format("Foi acrescentado {0} ao saldo", contaCorrenteDTO.getCredito()), Status.SUCCESS);
 
             return ResponseEntity.status(204).build();
 
         } catch (Exception ex) {
 
-            kafkaProducer.send(ErrorCode.BAD_REQUEST, Status.FAILED);
+            kafkaProducer.send(ErrorCode.BAD_REQUEST, "Crédito", Status.FAILED);
 
             return ResponseEntity.status(500).body(new AppException(ErrorCode.BAD_REQUEST));
         }

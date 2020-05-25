@@ -27,7 +27,7 @@ public class HistoricoController {
         return (List<HistoricoVO>) historicoRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity getContaById(@PathVariable(value = "id") String id) {
 
         try {
@@ -49,7 +49,7 @@ public class HistoricoController {
         }
     }
 
-    @GetMapping("/{num_conta}")
+    @GetMapping("/num-conta/{num_conta}")
     public ResponseEntity getContaByNumConta(@PathVariable(value = "num_conta") String num_conta) {
 
         try {

@@ -79,8 +79,9 @@ Site para download do [Docker](https://docs.docker.com/get-docker/).
       endereco VARCHAR,
       profissao VARCHAR,
       razao_social VARCHAR,
-      incr_estadual VARCHAR,
-      num_conta VARCHAR
+      inscr_estadual VARCHAR,
+      num_conta VARCHAR,
+      ativo INT
   );
 ```
 ```bash
@@ -88,7 +89,8 @@ Site para download do [Docker](https://docs.docker.com/get-docker/).
       num_conta VARCHAR PRIMARY KEY,
       agencia VARCHAR,
       dac INT,
-      saldo DOUBLE
+      saldo DOUBLE,
+      ativo INT
   );
 ```
 ```bash

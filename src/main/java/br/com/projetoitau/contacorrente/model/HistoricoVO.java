@@ -5,33 +5,45 @@ import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-import java.util.Date;
+import java.sql.Timestamp;
+import java.util.UUID;
 
 @Table(value = "historico")
 public class HistoricoVO {
 
     @PrimaryKeyColumn(
-            name = "cpf_cnpj",
+            name = "id",
             ordinal = 1,
             type = PrimaryKeyType.PARTITIONED
     )
-    private String cpf_cnpj;
+    private UUID id;
+
+    @Column(value = "num_conta")
+    private String num_conta;
 
     @Column(value = "tipo_de_transacao")
     private String tipo_de_transacao;
 
-    @Column(value = "date")
-    private Date date;
+    @Column(value = "data")
+    private Timestamp data;
 
     @Column(value = "status")
     private Integer status; // Failed = 0, Success = 1
 
-    public String getCpf_cnpj() {
-        return cpf_cnpj;
+    public UUID getId() {
+        return id;
     }
 
-    public void setCpf_cnpj(String cpf_cnpj) {
-        this.cpf_cnpj = cpf_cnpj;
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getNum_conta() {
+        return num_conta;
+    }
+
+    public void setNum_conta(String num_conta) {
+        this.num_conta = num_conta;
     }
 
     public String getTipo_de_transacao() {
@@ -42,12 +54,12 @@ public class HistoricoVO {
         this.tipo_de_transacao = tipo_de_transacao;
     }
 
-    public Date getDate() {
-        return date;
+    public Timestamp getData() {
+        return data;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setData(Timestamp data) {
+        this.data = data;
     }
 
     public Integer getStatus() {

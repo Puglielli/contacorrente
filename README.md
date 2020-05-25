@@ -97,6 +97,7 @@ Site para download do [Docker](https://docs.docker.com/get-docker/).
       id UUID PRIMARY KEY,
       num_conta VARCHAR,
       tipo_de_transacao VARCHAR,
+      tipo_de_operacao VARCHAR,
       data timestamp,
       status INT
   );
@@ -136,7 +137,70 @@ Executar a classe `ContacorrenteApplication`.
 
 ## Rotas
 
+**Cliente**
+
 ```bash
-  POST   http://localhost:8081/cliente
-  GET     http://localhost:8081/cliente
+  GET       http://localhost:8081/cliente
+  GET       http://localhost:8081/cliente/{cpf_cnpj}
+  POST      http://localhost:8081/cliente
+  PUT       http://localhost:8081/cliente/{cpf_cnpj}
+  DELETE    http://localhost:8081/cliente/{cpf_cnpj}
+```
+
+**Body (POST)**
+
+```bash
+  {
+    "nome": "Nome",
+    "cpf_cnpj": "11111111111",
+    "endereco": "Rua Teste, 404",
+    "profissao": "Tester I",
+    "razao_social": "",
+    "incr_estadual": ""
+  }
+```
+
+**Body (PUT)**
+
+```bash
+  {
+    "nome": "Nome tester",
+    "endereco": "Rua Teste 3, 320",
+    "profissao": "Tester II",
+    "razao_social": "Teste LTDA",
+    "incr_estadual": "200404401500"
+  }
+```
+
+**Conta Corrente**
+
+```bash
+  GET     http://localhost:8081/conta-corrente
+  GET   http://localhost:8081/conta-corrente/{num_conta}
+  PUT   http://localhost:8081/conta-corrente/debito
+  PUT   http://localhost:8081/conta-corrente/credito
+```
+
+**Body (PUT)**
+
+```bash
+  {
+    "num_conta": "123456-7",
+    "debito": 50
+  }
+```
+
+```bash
+  {
+    "num_conta": "123456-7",
+    "credito": 50
+  }
+```
+
+**Historico**
+
+```bash
+  GET     http://localhost:8081/historico
+  GET     http://localhost:8081/historico/{id}
+  GET     http://localhost:8081/historico/{num_conta}
 ```

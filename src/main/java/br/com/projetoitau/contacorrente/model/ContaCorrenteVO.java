@@ -24,6 +24,9 @@ public class ContaCorrenteVO {
     @Column(value = "saldo")
     private double saldo;
 
+    @Column(value = "ativo")
+    private Integer ativo;
+
     public String getNum_conta() {
         return num_conta;
     }
@@ -54,5 +57,13 @@ public class ContaCorrenteVO {
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
+    }
+
+    public Integer getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Integer ativo) {
+        this.ativo = ativo;
     }
 }

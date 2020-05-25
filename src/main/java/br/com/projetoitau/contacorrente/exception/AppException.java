@@ -1,5 +1,7 @@
 package br.com.projetoitau.contacorrente.exception;
 
+import br.com.projetoitau.contacorrente.utils.ErrorCode;
+
 import java.util.Date;
 
 public class AppException {

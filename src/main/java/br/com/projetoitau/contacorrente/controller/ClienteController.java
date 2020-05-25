@@ -1,20 +1,21 @@
 package br.com.projetoitau.contacorrente.controller;
 
 import br.com.projetoitau.contacorrente.exception.AppException;
-import br.com.projetoitau.contacorrente.exception.ErrorCode;
+import br.com.projetoitau.contacorrente.utils.ErrorCode;
 import br.com.projetoitau.contacorrente.controller.dto.ClienteDTO;
 import br.com.projetoitau.contacorrente.model.ClienteVO;
 import br.com.projetoitau.contacorrente.model.ContaCorrenteVO;
 import br.com.projetoitau.contacorrente.repository.ClienteRepository;
 import br.com.projetoitau.contacorrente.repository.ContaCorrenteRepository;
 import br.com.projetoitau.contacorrente.KafkaServices.KafkaProducer;
+import br.com.projetoitau.contacorrente.utils.Status;
 import br.com.projetoitau.contacorrente.utils.ValidateCPFCNPJ;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.cassandra.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Random;
 
 @RestController
@@ -34,14 +35,15 @@ public class ClienteController {
     }
 
     @GetMapping("")
-    public ResponseEntity getAllClients() throws JsonProcessingException {
+    public ResponseEntity getAllClientes() throws JsonProcessingException {
+
         try {
 
-            return ResponseEntity.ok().body((List<ClienteVO>) clienteRepository.findAll());
+            return ResponseEntity.ok().body(clienteRepository.getAllClientes().stream().filter(cliente -> cliente.getAtivo().equals(Status.ACTIVE.getCode())));
 
         } catch (Exception ex) {
 
-            kafkaProducer.send(ErrorCode.BAD_REQUEST, 0);
+            kafkaProducer.send(ErrorCode.BAD_REQUEST, Status.FAILED);
 
             return ResponseEntity.status(500).body(new AppException(ErrorCode.BAD_REQUEST));
         }
@@ -79,16 +81,20 @@ public class ClienteController {
 
                 if (!clienteRepository.getClienteByCPFCNPJ(cpfcnpj.getCpfCnpj()).isEmpty()) {
 
-                    kafkaProducer.send(ErrorCode.CPF_CNPJ_ALREADY_EXISTS, 0);
+                    kafkaProducer.send(ErrorCode.CPF_CNPJ_ALREADY_EXISTS, Status.FAILED);
 
                     return ResponseEntity.status(400).body(new AppException(ErrorCode.CPF_CNPJ_ALREADY_EXISTS));
 
                 } else if (!new ValidateCPFCNPJ(clienteDTO.getCpf_cnpj()).isValid()) {
 
+                    kafkaProducer.send(ErrorCode.CPF_CNPJ_INVALID, Status.FAILED);
+
                     return ResponseEntity.status(400).body(new AppException(ErrorCode.CPF_CNPJ_INVALID));
                 }
 
             } else {
+
+                kafkaProducer.send(ErrorCode.CPF_CNPJ_CANNOT_BE_NULL_OR_EMPTY, Status.FAILED);
 
                 return ResponseEntity.status(400).body(new AppException(ErrorCode.CPF_CNPJ_CANNOT_BE_NULL_OR_EMPTY));
             }
@@ -102,6 +108,7 @@ public class ClienteController {
             clienteVO.setProfissao(clienteDTO.getProfissao());
             clienteVO.setRazao_social(clienteDTO.getRazao_social());
             clienteVO.setInscr_estadual(clienteDTO.getInscr_estadual());
+            clienteVO.setAtivo(Status.ACTIVE.getCode());
 
             clienteVO = clienteRepository.save(clienteVO);
 
@@ -122,13 +129,13 @@ public class ClienteController {
 
             clienteVO = clienteRepository.save(clienteVO);
 
-            kafkaProducer.send(clienteVO, "Criação de um novo cliente", 1);
+            kafkaProducer.send(clienteVO, "Criação de um novo cliente", Status.SUCCESS);
 
             return ResponseEntity.ok().body(clienteVO);
 
         } catch (Exception ex) {
 
-            kafkaProducer.send(ErrorCode.BAD_REQUEST, 0);
+            kafkaProducer.send(ErrorCode.BAD_REQUEST, Status.FAILED);
 
             return ResponseEntity.status(500).body(new AppException(ErrorCode.BAD_REQUEST));
         }
@@ -143,7 +150,7 @@ public class ClienteController {
 
             if (cpfcnpj.getCpfCnpj() != null && clienteRepository.getClienteByCPFCNPJ(cpfcnpj.getCpfCnpj()).isEmpty()) {
 
-//                orderProducer.send(clienteVO, "Atualização dos dados do cliente", 1);
+                kafkaProducer.send(ErrorCode.CPF_CNPJ_NOT_FOUND, Status.FAILED);
 
                 return ResponseEntity.status(404).body(new AppException(ErrorCode.CPF_CNPJ_NOT_FOUND));
             }
@@ -158,13 +165,13 @@ public class ClienteController {
 
             clienteRepository.save(clienteVO);
 
-            kafkaProducer.send(clienteVO, "Atualização dos dados do cliente", 1);
+            kafkaProducer.send(clienteVO, "Atualização dos dados do cliente", Status.SUCCESS);
 
             return ResponseEntity.status(204).build();
 
         } catch (Exception ex) {
 
-            kafkaProducer.send(ErrorCode.BAD_REQUEST, 0);
+            kafkaProducer.send(ErrorCode.BAD_REQUEST, Status.FAILED);
 
             return ResponseEntity.status(500).body(new AppException(ErrorCode.BAD_REQUEST));
         }
@@ -172,28 +179,31 @@ public class ClienteController {
 
     @DeleteMapping("/{cpf_cnpj}")
     public ResponseEntity deletarCliente(@PathVariable(value = "cpf_cnpj") String cpf_cnpj) throws JsonProcessingException {
+
         try {
 
             ValidateCPFCNPJ cpfcnpj = new ValidateCPFCNPJ(cpf_cnpj);
 
             if (clienteRepository.getClienteByCPFCNPJ(cpfcnpj.getCpfCnpj()).isEmpty()) {
 
-                kafkaProducer.send(ErrorCode.CPF_CNPJ_NOT_FOUND, 0);
+                kafkaProducer.send(ErrorCode.CPF_CNPJ_NOT_FOUND, Status.FAILED);
 
                 return ResponseEntity.status(404).body(new AppException(ErrorCode.CPF_CNPJ_NOT_FOUND));
             }
 
             ClienteVO clienteVO = clienteRepository.getClienteByCPFCNPJ(cpfcnpj.getCpfCnpj()).get(0);
 
-            kafkaProducer.send(clienteVO, "Cliente excluido com Sucesso", 1);
+            kafkaProducer.send(clienteVO, "Cliente excluido com Sucesso", Status.SUCCESS);
 
-            clienteRepository.delete(clienteVO);
+            clienteVO.setAtivo(Status.INATIVE.getCode());
+
+            clienteRepository.save(clienteVO);
 
             return ResponseEntity.status(204).build();
 
         } catch (Exception ex) {
 
-            kafkaProducer.send(ErrorCode.BAD_REQUEST, 0);
+            kafkaProducer.send(ErrorCode.BAD_REQUEST, Status.FAILED);
 
             return ResponseEntity.status(500).body(new AppException(ErrorCode.BAD_REQUEST));
         }

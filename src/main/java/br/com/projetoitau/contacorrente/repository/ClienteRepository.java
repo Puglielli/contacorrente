@@ -13,4 +13,7 @@ public interface ClienteRepository extends CrudRepository<ClienteVO, String> {
 
     @Query(value = "select * from cliente where cpf_cnpj = (:cpf_cnpj)")
     List<ClienteVO> getClienteByCPFCNPJ(@Param("cpf_cnpj") String cpf_cnpj);
+
+    @Query(value = "select * from cliente")
+    List<ClienteVO> getAllClientes();
 }

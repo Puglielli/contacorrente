@@ -1,7 +1,7 @@
 package br.com.projetoitau.contacorrente.controller;
 
 import br.com.projetoitau.contacorrente.exception.AppException;
-import br.com.projetoitau.contacorrente.exception.ErrorCode;
+import br.com.projetoitau.contacorrente.utils.ErrorCode;
 import br.com.projetoitau.contacorrente.model.HistoricoVO;
 import br.com.projetoitau.contacorrente.repository.HistoricoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

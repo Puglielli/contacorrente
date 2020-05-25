@@ -8,6 +8,7 @@ public class ContaCorrenteDTO {
     private double saldo;
     private double debito;
     private double credito;
+    private Integer ativo;
 
     public String getNum_conta() {
         return num_conta;
@@ -55,5 +56,13 @@ public class ContaCorrenteDTO {
 
     public void setCredito(double credito) {
         this.credito = credito;
+    }
+
+    public Integer getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Integer ativo) {
+        this.ativo = ativo;
     }
 }

@@ -38,6 +38,9 @@ public class ClienteVO implements Serializable {
     @Column(value = "num_conta")
     private String num_conta;
 
+    @Column(value = "ativo")
+    private Integer ativo;
+
     public String getNome() {
         return nome;
     }
@@ -100,5 +103,13 @@ public class ClienteVO implements Serializable {
 
     public void setNum_conta(String num_conta) {
         this.num_conta = num_conta;
+    }
+
+    public Integer getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Integer ativo) {
+        this.ativo = ativo;
     }
 }

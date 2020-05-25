@@ -1,4 +1,4 @@
-package br.com.projetoitau.contacorrente.exception;
+package br.com.projetoitau.contacorrente.utils;
 
 public enum ErrorCode {
 

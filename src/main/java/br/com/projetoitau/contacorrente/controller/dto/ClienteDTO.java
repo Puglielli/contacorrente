@@ -10,6 +10,7 @@ public class ClienteDTO {
     private String razao_social;
     private String inscr_estadual;
     private String num_conta;
+    private Integer ativo;
 
     public String getNome() {
         return nome;
@@ -73,5 +74,13 @@ public class ClienteDTO {
 
     public void setNum_conta(String num_conta) {
         this.num_conta = num_conta;
+    }
+
+    public Integer getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Integer ativo) {
+        this.ativo = ativo;
     }
 }

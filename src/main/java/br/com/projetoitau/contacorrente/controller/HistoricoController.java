@@ -1,6 +1,7 @@
 package br.com.projetoitau.contacorrente.controller;
 
 import br.com.projetoitau.contacorrente.exception.AppException;
+import br.com.projetoitau.contacorrente.utils.BaseResource;
 import br.com.projetoitau.contacorrente.utils.ErrorCode;
 import br.com.projetoitau.contacorrente.model.HistoricoVO;
 import br.com.projetoitau.contacorrente.repository.HistoricoRepository;
@@ -14,6 +15,8 @@ import java.util.List;
 import java.util.UUID;
 
 import static br.com.projetoitau.contacorrente.utils.BaseResource.formatAccount;
+import static br.com.projetoitau.contacorrente.utils.BaseResource.toHistoricoDTO;
+import static br.com.projetoitau.contacorrente.utils.BaseResource.toHistoricoDTOList;
 
 @RestController
 @RequestMapping("historico")
@@ -39,9 +42,11 @@ public class HistoricoController {
                 return ResponseEntity.status(404).body(new AppException(ErrorCode.ID_NOT_FOUND));
             }
 
-            HistoricoVO historicoVO = historicoVOS.get(0);
+            return ResponseEntity.ok().body(toHistoricoDTO(historicoVOS.get(0)));
 
-            return ResponseEntity.ok().body(historicoVO);
+        } catch(IllegalArgumentException i) {
+
+            return ResponseEntity.status(500).body(new AppException(ErrorCode.ID_NOT_FOUND));
 
         } catch (Exception ex) {
 
@@ -61,9 +66,7 @@ public class HistoricoController {
                 return ResponseEntity.status(404).body(new AppException(ErrorCode.CPF_CNPJ_NOT_FOUND));
             }
 
-            HistoricoVO historicoVO = historicoVOS.get(0);
-
-            return ResponseEntity.ok().body(historicoVO);
+            return ResponseEntity.ok().body(toHistoricoDTOList(historicoVOS));
 
         } catch (Exception ex) {
 

@@ -12,8 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static br.com.projetoitau.contacorrente.utils.BaseResource.*;
 import static java.text.MessageFormat.format;
-import static br.com.projetoitau.contacorrente.utils.BaseResource.formatAccount;
+
 import java.util.List;
 
 @RestController
@@ -34,7 +35,7 @@ public class ContaCorrenteController {
 
         try {
 
-            return ResponseEntity.ok().body(contaCorrenteRepository.getAllContasAtivos(Status.ACTIVE.getCode()));
+            return ResponseEntity.ok().body(toContaCorrentDTOList(contaCorrenteRepository.getAllContas()));
 
         } catch (Exception ex) {
 
@@ -54,9 +55,7 @@ public class ContaCorrenteController {
                 return ResponseEntity.status(404).body(new AppException(ErrorCode.ACCOUNT_NOT_FOUND));
             }
 
-            ContaCorrenteVO contaCorrenteVO = contaCorrenteRepository.getContaCorrenteByNumConta(num_conta).get(0);
-
-            return ResponseEntity.ok().body(contaCorrenteVO);
+            return ResponseEntity.ok().body(toContaCorrentDTO(contaCorrenteRepository.getContaCorrenteByNumConta(formatAccount(num_conta)).get(0)));
 
         } catch (Exception ex) {
 

@@ -15,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static br.com.projetoitau.contacorrente.utils.BaseResource.formatAccount;
-import static br.com.projetoitau.contacorrente.utils.BaseResource.generateNewAccount;
-import static br.com.projetoitau.contacorrente.utils.BaseResource.generateNewAgency;
-import static br.com.projetoitau.contacorrente.utils.BaseResource.getDac;
+import static br.com.projetoitau.contacorrente.utils.BaseResource.*;
 
 @RestController
 @RequestMapping("cliente")
@@ -41,7 +38,7 @@ public class ClienteController {
 
         try {
 
-            return ResponseEntity.ok().body(clienteRepository.getAllClientes().stream().filter(cliente -> cliente.getAtivo().equals(Status.ACTIVE.getCode())));
+            return ResponseEntity.ok().body(toClienteDTOList(clienteRepository.getAllClientes()));
 
         } catch (Exception ex) {
 
@@ -65,9 +62,7 @@ public class ClienteController {
                 return ResponseEntity.status(404).body(new AppException(ErrorCode.CPF_CNPJ_NOT_FOUND));
             }
 
-            ClienteVO clienteVO = clienteRepository.getClienteByCPFCNPJ(cpfcnpj.getCpfCnpj()).get(0);
-
-            return ResponseEntity.ok().body(clienteVO);
+            return ResponseEntity.ok().body(toClienteDTO(clienteRepository.getClienteByCPFCNPJ(cpfcnpj.getCpfCnpj()).get(0)));
 
         } catch (Exception ex) {
 
@@ -106,18 +101,7 @@ public class ClienteController {
                 return ResponseEntity.status(400).body(new AppException(ErrorCode.CPF_CNPJ_CANNOT_BE_NULL_OR_EMPTY));
             }
 
-            ClienteVO clienteVO = new ClienteVO();
-
-            clienteVO.setNome(clienteDTO.getNome());
-            clienteVO.setCpf_cnpj(cpfcnpj.getCpfCnpj());
-            clienteVO.setTipo_de_cliente(cpfcnpj.isPJ() ? "PJ" : "PF");
-            clienteVO.setEndereco(clienteDTO.getEndereco());
-            clienteVO.setProfissao(clienteDTO.getProfissao());
-            clienteVO.setRazao_social(clienteDTO.getRazao_social());
-            clienteVO.setInscr_estadual(clienteDTO.getInscr_estadual());
-            clienteVO.setAtivo(Status.ACTIVE.getCode());
-
-            clienteVO = clienteRepository.save(clienteVO);
+            ClienteVO clienteVO = clienteRepository.save(toClienteVO(clienteDTO));
 
             ContaCorrenteVO contaCorrenteVO = new ContaCorrenteVO();
 
@@ -125,6 +109,7 @@ public class ClienteController {
             contaCorrenteVO.setNum_conta(formatAccount(generateNewAccount()));
             contaCorrenteVO.setDac(getDac(contaCorrenteVO.getAgencia()));
             contaCorrenteVO.setSaldo(0);
+            contaCorrenteVO.setAtivo(Status.ACTIVE.getCode());
 
             contaCorrenteVO = contaCorrenteRepository.save(contaCorrenteVO);
 

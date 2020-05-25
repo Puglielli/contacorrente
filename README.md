@@ -156,7 +156,7 @@ Executar a classe `ContacorrenteApplication`.
     "endereco": "Rua Teste, 404",
     "profissao": "Tester I",
     "razao_social": "",
-    "incr_estadual": ""
+    "inscr_estadual": ""
   }
 ```
 
@@ -168,7 +168,7 @@ Executar a classe `ContacorrenteApplication`.
     "endereco": "Rua Teste 3, 320",
     "profissao": "Tester II",
     "razao_social": "Teste LTDA",
-    "incr_estadual": "200404401500"
+    "inscr_estadual": "200404401500"
   }
 ```
 
@@ -201,6 +201,6 @@ Executar a classe `ContacorrenteApplication`.
 
 ```bash
   GET     http://localhost:8081/historico
-  GET     http://localhost:8081/historico/{id}
-  GET     http://localhost:8081/historico/{num_conta}
+  GET     http://localhost:8081/historico/id/{id}
+  GET     http://localhost:8081/historico/num-conta/{num_conta}
 ```

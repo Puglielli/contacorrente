@@ -8,7 +8,10 @@ public enum ErrorCode {
     CPF_CNPJ_INVALID(1004, "CPF / CNPJ invalido"),
     BAD_REQUEST(1005, "Erro ao executar a acao"),
     ACCOUNT_NOT_FOUND(1006, "Conta nao existe"),
-    INSUFFICIENT_FUNDS(1007, "Saldo Insuficiente");
+    INSUFFICIENT_FUNDS(1007, "Saldo Insuficiente"),
+    ID_NOT_FOUND(1008, "ID não encontrado"),
+    CLIENT_HAS_ALREADY_BEEN_DELETED(1008, "Cliente já foi deletado");
+
 
     private Integer code;
     private String message;

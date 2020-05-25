@@ -2,10 +2,8 @@ package br.com.projetoitau.contacorrente.controller;
 
 import br.com.projetoitau.contacorrente.exception.AppException;
 import br.com.projetoitau.contacorrente.exception.ErrorCode;
-import br.com.projetoitau.contacorrente.model.ContaCorrenteVO;
 import br.com.projetoitau.contacorrente.model.HistoricoVO;
 import br.com.projetoitau.contacorrente.repository.HistoricoRepository;
-import br.com.projetoitau.contacorrente.utils.ValidateCPFCNPJ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,18 +25,22 @@ public class HistoricoController {
         return (List<HistoricoVO>) historicoRepository.findAll();
     }
 
-    @GetMapping("/{cpf_cnpj}")
-    public ResponseEntity getContaByPK(@PathVariable(value = "cpf_cnpj") String cpf_cnpj) {
+    @GetMapping("/{num_conta}")
+    public ResponseEntity getContaByPK(@PathVariable(value = "num_conta") String num_conta) {
         try {
 
-            ValidateCPFCNPJ cpfcnpj = new ValidateCPFCNPJ(cpf_cnpj);
+            num_conta = num_conta.replaceAll("/\\D/g", "");
 
-            if (historicoRepository.getHistoricoByCPFCNPJ(cpfcnpj.getCpfCnpj()).isEmpty()) {
+            num_conta = num_conta.replaceAll("([0-9]{8})([0-9]{1})", "$1-$2");
+
+            List<HistoricoVO> historicoVOS = historicoRepository.getHistoricoByNumConta(num_conta);
+
+            if (historicoVOS.isEmpty()) {
 
                 return ResponseEntity.status(404).body(new AppException(ErrorCode.CPF_CNPJ_NOT_FOUND));
             }
 
-            HistoricoVO historicoVO = historicoRepository.getHistoricoByCPFCNPJ(cpfcnpj.getCpfCnpj()).get(0);
+            HistoricoVO historicoVO = historicoVOS.get(0);
 
             return ResponseEntity.ok().body(historicoVO);
 

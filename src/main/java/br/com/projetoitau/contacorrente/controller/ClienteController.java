@@ -7,7 +7,9 @@ import br.com.projetoitau.contacorrente.model.ClienteVO;
 import br.com.projetoitau.contacorrente.model.ContaCorrenteVO;
 import br.com.projetoitau.contacorrente.repository.ClienteRepository;
 import br.com.projetoitau.contacorrente.repository.ContaCorrenteRepository;
+import br.com.projetoitau.contacorrente.KafkaServices.KafkaProducer;
 import br.com.projetoitau.contacorrente.utils.ValidateCPFCNPJ;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +27,21 @@ public class ClienteController {
     @Autowired
     ContaCorrenteRepository contaCorrenteRepository;
 
+    private final KafkaProducer kafkaProducer;
+
+    public ClienteController(KafkaProducer kafkaProducer) {
+        this.kafkaProducer = kafkaProducer;
+    }
+
     @GetMapping("")
-    public ResponseEntity getAllClients() {
+    public ResponseEntity getAllClients() throws JsonProcessingException {
         try {
 
             return ResponseEntity.ok().body((List<ClienteVO>) clienteRepository.findAll());
 
         } catch (Exception ex) {
+
+            kafkaProducer.send(ErrorCode.BAD_REQUEST, 0);
 
             return ResponseEntity.status(500).body(new AppException(ErrorCode.BAD_REQUEST));
         }
@@ -59,7 +69,7 @@ public class ClienteController {
     }
 
     @PostMapping("")
-    public ResponseEntity saveCliente(@RequestBody ClienteDTO clienteDTO) {
+    public ResponseEntity saveCliente(@RequestBody ClienteDTO clienteDTO) throws JsonProcessingException {
 
         try {
 
@@ -68,6 +78,8 @@ public class ClienteController {
             if (clienteDTO != null && cpfcnpj.getCpfCnpj() != null) {
 
                 if (!clienteRepository.getClienteByCPFCNPJ(cpfcnpj.getCpfCnpj()).isEmpty()) {
+
+                    kafkaProducer.send(ErrorCode.CPF_CNPJ_ALREADY_EXISTS, 0);
 
                     return ResponseEntity.status(400).body(new AppException(ErrorCode.CPF_CNPJ_ALREADY_EXISTS));
 
@@ -110,22 +122,28 @@ public class ClienteController {
 
             clienteVO = clienteRepository.save(clienteVO);
 
+            kafkaProducer.send(clienteVO, "Criação de um novo cliente", 1);
+
             return ResponseEntity.ok().body(clienteVO);
 
         } catch (Exception ex) {
+
+            kafkaProducer.send(ErrorCode.BAD_REQUEST, 0);
 
             return ResponseEntity.status(500).body(new AppException(ErrorCode.BAD_REQUEST));
         }
     }
 
     @PutMapping("/{cpf_cnpj}")
-    public ResponseEntity atualizaCliente(@PathVariable(value = "cpf_cnpj") String cpf_cnpj, @RequestBody ClienteDTO clienteDTO) {
+    public ResponseEntity atualizaCliente(@PathVariable(value = "cpf_cnpj") String cpf_cnpj, @RequestBody ClienteDTO clienteDTO) throws JsonProcessingException {
 
         try {
 
             ValidateCPFCNPJ cpfcnpj = new ValidateCPFCNPJ(cpf_cnpj);
 
             if (cpfcnpj.getCpfCnpj() != null && clienteRepository.getClienteByCPFCNPJ(cpfcnpj.getCpfCnpj()).isEmpty()) {
+
+//                orderProducer.send(clienteVO, "Atualização dos dados do cliente", 1);
 
                 return ResponseEntity.status(404).body(new AppException(ErrorCode.CPF_CNPJ_NOT_FOUND));
             }
@@ -140,32 +158,42 @@ public class ClienteController {
 
             clienteRepository.save(clienteVO);
 
+            kafkaProducer.send(clienteVO, "Atualização dos dados do cliente", 1);
+
             return ResponseEntity.status(204).build();
 
         } catch (Exception ex) {
+
+            kafkaProducer.send(ErrorCode.BAD_REQUEST, 0);
 
             return ResponseEntity.status(500).body(new AppException(ErrorCode.BAD_REQUEST));
         }
     }
 
     @DeleteMapping("/{cpf_cnpj}")
-    public ResponseEntity deletarCliente(@PathVariable(value = "cpf_cnpj") String cpf_cnpj) {
+    public ResponseEntity deletarCliente(@PathVariable(value = "cpf_cnpj") String cpf_cnpj) throws JsonProcessingException {
         try {
 
             ValidateCPFCNPJ cpfcnpj = new ValidateCPFCNPJ(cpf_cnpj);
 
             if (clienteRepository.getClienteByCPFCNPJ(cpfcnpj.getCpfCnpj()).isEmpty()) {
 
+                kafkaProducer.send(ErrorCode.CPF_CNPJ_NOT_FOUND, 0);
+
                 return ResponseEntity.status(404).body(new AppException(ErrorCode.CPF_CNPJ_NOT_FOUND));
             }
 
             ClienteVO clienteVO = clienteRepository.getClienteByCPFCNPJ(cpfcnpj.getCpfCnpj()).get(0);
+
+            kafkaProducer.send(clienteVO, "Cliente excluido com Sucesso", 1);
 
             clienteRepository.delete(clienteVO);
 
             return ResponseEntity.status(204).build();
 
         } catch (Exception ex) {
+
+            kafkaProducer.send(ErrorCode.BAD_REQUEST, 0);
 
             return ResponseEntity.status(500).body(new AppException(ErrorCode.BAD_REQUEST));
         }

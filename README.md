@@ -5,7 +5,6 @@ Tecnologias utilizadas:
 - SpringBoot
   - Web
   - DevTools
-  - Lombok
   - SpringData Cassandra
   - Spring Kafka
 

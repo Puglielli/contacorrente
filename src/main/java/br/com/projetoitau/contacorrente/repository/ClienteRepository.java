@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public interface ClienteRepository extends CrudRepository<ClienteVO, String> {
 
-    @Query(value = "select * from cliente where cpf_cnpj = (:cpf_cnpj)")
+    @Query(value = "select * from cliente where cpf_cnpj = (:cpf_cnpj) ALLOW FILTERING")
     List<ClienteVO> getClienteByCPFCNPJ(@Param("cpf_cnpj") String cpf_cnpj);
 
-    @Query(value = "select * from cliente")
+    @Query(value = "select * from cliente ALLOW FILTERING")
     List<ClienteVO> getAllClientes();
 }

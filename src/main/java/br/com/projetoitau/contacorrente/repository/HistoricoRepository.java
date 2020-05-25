@@ -12,9 +12,9 @@ import java.util.UUID;
 @Repository
 public interface HistoricoRepository extends CrudRepository<HistoricoVO, String> {
 
-    @Query(value = "select * from historico where num_conta = (:num_conta)")
+    @Query(value = "select * from historico where num_conta = (:num_conta) ALLOW FILTERING")
     List<HistoricoVO> getHistoricoByNumConta(@Param("num_conta") String num_conta);
 
-    @Query(value = "select * from historico where id = (:id)")
+    @Query(value = "select * from historico where id = (:id) ALLOW FILTERING")
     List<HistoricoVO> getHistoricoById(@Param("id") UUID id);
 }

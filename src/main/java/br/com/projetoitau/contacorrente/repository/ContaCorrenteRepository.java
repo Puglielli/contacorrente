@@ -12,10 +12,10 @@ import java.util.List;
 @Repository
 public interface ContaCorrenteRepository extends CrudRepository<ContaCorrenteVO, String> {
 
-    @Query(value = "select * from conta where num_conta = (:num_conta)")
+    @Query(value = "select * from conta where num_conta = (:num_conta) ALLOW FILTERING")
     List<ContaCorrenteVO> getContaCorrenteByNumConta(@Param("num_conta") String num_conta);
 
-    @Query(value = "select * from conta where ativo = (:ativo)")
-    List<ClienteVO> getAllContasAtivos(@Param("ativo") Integer ativo);
+    @Query(value = "select * from conta ALLOW FILTERING")
+    List<ContaCorrenteVO> getAllContas();
 
 }

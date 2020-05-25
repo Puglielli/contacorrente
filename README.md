@@ -79,7 +79,7 @@ Site para download do [Docker](https://docs.docker.com/get-docker/).
       endereco VARCHAR,
       profissao VARCHAR,
       razao_social VARCHAR,
-      inscr_estadual VARCHAR,
+      incr_estadual VARCHAR,
       num_conta VARCHAR
   );
 ```

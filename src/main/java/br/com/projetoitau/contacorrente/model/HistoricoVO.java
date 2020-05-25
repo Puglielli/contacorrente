@@ -24,6 +24,9 @@ public class HistoricoVO {
     @Column(value = "tipo_de_transacao")
     private String tipo_de_transacao;
 
+    @Column(value = "tipo_de_operacao")
+    private String tipo_de_operacao;
+
     @Column(value = "data")
     private Timestamp data;
 
@@ -52,6 +55,14 @@ public class HistoricoVO {
 
     public void setTipo_de_transacao(String tipo_de_transacao) {
         this.tipo_de_transacao = tipo_de_transacao;
+    }
+
+    public String getTipo_de_operacao() {
+        return tipo_de_operacao;
+    }
+
+    public void setTipo_de_operacao(String tipo_de_operacao) {
+        this.tipo_de_operacao = tipo_de_operacao;
     }
 
     public Timestamp getData() {

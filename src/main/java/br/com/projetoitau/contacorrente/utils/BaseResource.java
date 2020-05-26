@@ -103,7 +103,7 @@ public class BaseResource {
         return clienteVO;
     }
 
-    public static ContaCorrenteDTO toContaCorrentDTO(ContaCorrenteVO contaCorrenteVO) {
+    public static ContaCorrenteDTO toContaCorrenteDTO(ContaCorrenteVO contaCorrenteVO) {
         ContaCorrenteDTO contaCorrenteDTO = new ContaCorrenteDTO();
 
         contaCorrenteDTO.setNum_conta(contaCorrenteVO.getNum_conta());
@@ -115,14 +115,14 @@ public class BaseResource {
         return contaCorrenteDTO;
     }
 
-    public static List<ContaCorrenteDTO> toContaCorrentDTOList(List<ContaCorrenteVO> contaCorrenteVO) {
+    public static List<ContaCorrenteDTO> toContaCorrentDTOList(List<ContaCorrenteVO> contaCorrenteVOS) {
         List<ContaCorrenteDTO> contaCorrenteDTOS = new ArrayList<>(0);
 
-        for (ContaCorrenteVO vo : contaCorrenteVO) {
+        for (ContaCorrenteVO vo : contaCorrenteVOS) {
 
             if (vo.getAtivo().equals(Status.ACTIVE.getCode())) {
 
-                contaCorrenteDTOS.add(toContaCorrentDTO(vo));
+                contaCorrenteDTOS.add(toContaCorrenteDTO(vo));
             }
         }
 

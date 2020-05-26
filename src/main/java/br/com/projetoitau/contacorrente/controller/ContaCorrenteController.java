@@ -55,7 +55,7 @@ public class ContaCorrenteController {
                 return ResponseEntity.status(404).body(new AppException(ErrorCode.ACCOUNT_NOT_FOUND));
             }
 
-            return ResponseEntity.ok().body(toContaCorrentDTO(contaCorrenteRepository.getContaCorrenteByNumConta(formatAccount(num_conta)).get(0)));
+            return ResponseEntity.ok().body(toContaCorrenteDTO(contaCorrenteRepository.getContaCorrenteByNumConta(formatAccount(num_conta)).get(0)));
 
         } catch (Exception ex) {
 

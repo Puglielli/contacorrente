@@ -11,6 +11,7 @@ import br.com.projetoitau.contacorrente.KafkaServices.KafkaProducer;
 import br.com.projetoitau.contacorrente.utils.Status;
 import br.com.projetoitau.contacorrente.utils.ValidateCPFCNPJ;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.kafka.common.metrics.Stat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -188,11 +189,17 @@ public class ClienteController {
                 return ResponseEntity.status(404).body(new AppException(ErrorCode.CLIENT_HAS_ALREADY_BEEN_DELETED));
             }
 
-            kafkaProducer.send(clienteVO, "Deletar Cliente", "Exclusão realizada com sucesso", Status.SUCCESS);
-
             clienteVO.setAtivo(Status.INATIVE.getCode());
 
-            clienteRepository.save(clienteVO);
+            clienteRepository.save(clienteVO); // Inativando Cliente
+
+            ContaCorrenteVO contaCorrenteVO = contaCorrenteRepository.getContaCorrenteByNumConta(clienteVO.getNum_conta()).get(0);
+
+            contaCorrenteVO.setAtivo(Status.INATIVE.getCode());
+
+            contaCorrenteRepository.save(contaCorrenteVO);  // Inativando Conta
+
+            kafkaProducer.send(clienteVO, "Deletar Cliente", "Exclusão realizada com sucesso", Status.SUCCESS);
 
             return ResponseEntity.status(204).build();
 

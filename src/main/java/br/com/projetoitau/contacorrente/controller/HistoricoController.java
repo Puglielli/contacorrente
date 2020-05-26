@@ -1,7 +1,6 @@
 package br.com.projetoitau.contacorrente.controller;
 
 import br.com.projetoitau.contacorrente.exception.AppException;
-import br.com.projetoitau.contacorrente.utils.BaseResource;
 import br.com.projetoitau.contacorrente.utils.ErrorCode;
 import br.com.projetoitau.contacorrente.model.HistoricoVO;
 import br.com.projetoitau.contacorrente.repository.HistoricoRepository;
@@ -73,5 +72,4 @@ public class HistoricoController {
             return ResponseEntity.status(500).body(new AppException(ErrorCode.BAD_REQUEST));
         }
     }
-
 }

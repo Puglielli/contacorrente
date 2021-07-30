@@ -1,0 +1,24 @@
+spring:
+  profiles.active: ${PROFILES}
+  application:
+    name: contacorrente
+ 
+  data:
+    cassandra:
+     contact: locahost
+     port: ${CASSANDRA_PORT}
+     keyspace: ${CASSANDRA_KEYSPACE}
+     username: ${CASSANDRA_USERNAME}
+     password: ${CASSANDRA_PASSWORD}
+ 
+  kafka:
+   bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+   
+   consumer:
+    group-id: ${spring.application.name}
+    auto-offset-reset: ${KAFKA_AUTO_OFFSET_RESET}
+    value-deserializer: ${KAFKA_VALUE_DESERIALIZER}
+    value-serializer: ${KAFKA_VALUE_SERIALIZER}
+    topic: ${KAFKA_TOPIC}
+
+server.port: ${SERVER_PORT}

@@ -1,12 +1,17 @@
 # ![uit](https://user-images.githubusercontent.com/62891985/82739494-5e96bd80-9d16-11ea-993d-25c048bad462.png) Projeto Itaú/USCS - Conta Corrente
 
-Tecnologias utilizadas:
+# ContaCorrente
 
-- SpringBoot
-  - Web
-  - DevTools
-  - SpringData Cassandra
-  - Spring Kafka
+## Tech Stack
+
+| Dependency             | Version |
+| -----------------------|---------|
+| 'Kotin'.               | '1.5.0' |
+| 'Spring Boot'          | '2.4.5' |
+| 'Junit'                | '5.6.0' |
+| 'Telegram Bot'         | '5.2.0' |
+| 'WebFlux'              | '2.4.5' |
+| 'SpringData Cassandra' | '2.4.5' |
 
 - Banco de dados
   - Cassandra

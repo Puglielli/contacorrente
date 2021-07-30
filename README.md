@@ -1,5 +1,10 @@
 # ![uit](https://user-images.githubusercontent.com/62891985/82739494-5e96bd80-9d16-11ea-993d-25c048bad462.png) Projeto Itaú/USCS - Conta Corrente
 
+## About
+- Projeto para simular um sistema bancario, incluindo serviços como transacoes de debito e credito, criacao de contas de usuarios... Usamos Java para implemetacao dos serviços, kafka para trafego de mensagens e cassandra como banco de dados.
+
+- Project to simulate a banking system, including services such as debit and credit transactions, creation of user accounts... We use Java for service implementation, kafka for message traffic and cassandra as database.
+
 ## Tech Stack
 
 | Dependency             | Version |

@@ -4,7 +4,7 @@
 
 | Dependency             | Version |
 | -----------------------|---------|
-| 'Kotin'.               | '1.5.0' |
+| 'Java'.                | '11'    |
 | 'Spring Boot'          | '2.4.5' |
 | 'Junit'                | '5.6.0' |
 | 'Telegram Bot'         | '5.2.0' |

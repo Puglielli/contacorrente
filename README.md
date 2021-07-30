@@ -1,7 +1,5 @@
 # ![uit](https://user-images.githubusercontent.com/62891985/82739494-5e96bd80-9d16-11ea-993d-25c048bad462.png) Projeto Itaú/USCS - Conta Corrente
 
-# ContaCorrente
-
 ## Tech Stack
 
 | Dependency             | Version |
